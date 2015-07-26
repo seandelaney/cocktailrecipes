@@ -37,12 +37,21 @@ class CocktailRecipes_IngredientsFieldType extends BaseFieldType
      */
     public function getInputHtml($name, $value)
     {
-        // call our service layer to get a current list of ingredients
+       // call our service layer to get a current list of ingredients
         $ingredients = craft()->cocktailRecipes_ingredients->getAllIngredients();
+
+        // creat an array for the ingredients 
+        $ingredientsOptions = array();
+
+        // populate the $ingredientsOptions array
+        foreach ($ingredientsOptions as $ingredient )
+        {
+            $ingredientsOptions[$ingredient->id] =  $ingredient->name;
+        }
 
         return craft()->templates->render('cocktailrecipes/_fieldtypes/ingredients', array(
             'name'      => $name,
-            'options'   => $ingredients,
+            'options'   => $ingredientsOptions,
             'values'    => $value,
         ));
     }
