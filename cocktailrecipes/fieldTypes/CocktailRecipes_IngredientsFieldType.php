@@ -40,9 +40,18 @@ class CocktailRecipes_IngredientsFieldType extends BaseFieldType
         // call our service layer to get a current list of ingredients
         $ingredients = craft()->cocktailRecipes_ingredients->getAllIngredients();
 
+        // create an array for the ingredients 
+        $ingredientsOptions = array();
+
+        // populate the $ingredientsOptions array with $ingredients
+        foreach ($ingredientsOptions as $ingredient )
+        {
+            $ingredientsOptions[$ingredient->id] =  $ingredient->name;
+        }
+
         return craft()->templates->render('cocktailrecipes/_fieldtypes/ingredients', array(
             'name'      => $name,
-            'options'   => $ingredients,
+            'options'   => $ingredientsOptions,
             'values'    => $value,
         ));
     }
